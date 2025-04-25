@@ -1,10 +1,16 @@
 import app from "./app";
 import logger from "./config/logger";
+import KafkaFactory from "./KafkaFactory";
+import { initDb } from "./db";
 
-const startServer = () => {
+const kafkaFactoryInstance = KafkaFactory();
+
+const startServer = async () => {
     const PORT = 5502;
     try {
         app.listen(PORT, () => logger.info(`Listening on port ${PORT}`));
+        await kafkaFactoryInstance.connect();
+        await initDb();
     } catch (err: unknown) {
         if (err instanceof Error) {
             logger.error(err.message);
@@ -15,4 +21,4 @@ const startServer = () => {
     }
 };
 
-startServer();
+void startServer();
