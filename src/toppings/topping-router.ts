@@ -10,7 +10,7 @@ router.post("/topping/create", (req, res) => {
     toppingController.create(req, res);
 });
 
-router.get("/api/catalog/toppings", (req, res) => {
+router.get("/toppings", (req, res) => {
     toppingController.getAll(req, res);
 });
 

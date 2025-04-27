@@ -4,6 +4,7 @@ import ProductModal from "./product-model";
 import { S3Storage } from "../services/S3Storage";
 import KafkaBroker from "../KafkaBroker";
 import { UploadedFile } from "express-fileupload";
+import KafkaFactory from "../KafkaFactory";
 
 interface PriceConfiguration {
     [key: string]: {
@@ -30,7 +31,7 @@ interface productType {
     _id: string;
 }
 
-const kafka = new KafkaBroker("catalog-service", ["localhost:9092"]);
+const kafka = KafkaFactory();
 
 export class ProductController {
     s3 = new S3Storage();

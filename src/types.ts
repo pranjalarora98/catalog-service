@@ -12,6 +12,6 @@ export interface Message {
 
 export interface kafkaType {
     connect: () => Promise<void>;
-    sendMessage: (topic: string, messages: Message[]) => void;
+    sendMessage: (topic: string, messages: Message[]) => Promise<void>;
     disconnect: () => Promise<void>;
 }
