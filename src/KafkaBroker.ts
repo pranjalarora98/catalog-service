@@ -1,5 +1,5 @@
-import { Kafka, Producer } from "kafkajs";
-import { kafkaType, Message } from "./types";
+import { Kafka, Message, Producer } from "kafkajs";
+import { kafkaType } from "./types";
 
 class KafkaBroker implements kafkaType {
     private kafka: Kafka;

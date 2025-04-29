@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ToppingType } from "../types";
 
 const ToppingSchema = new mongoose.Schema({
     name: {
@@ -22,6 +23,9 @@ const ToppingSchema = new mongoose.Schema({
     },
 });
 
-const ToppingModel = mongoose.model("ToppingSchema", ToppingSchema);
+const ToppingModel = mongoose.model<ToppingType>(
+    "ToppingSchema",
+    ToppingSchema,
+);
 
 export default ToppingModel;

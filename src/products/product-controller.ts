@@ -36,7 +36,6 @@ const kafka = KafkaFactory();
 export class ProductController {
     s3 = new S3Storage();
     async create(req: Request, res: Response) {
-        console.log("control-body", req.body, req.files);
         await kafka.connect();
         try {
             const { priceConfiguration, category } = req.body;
@@ -73,8 +72,7 @@ export class ProductController {
 
             await kafka.sendMessage("product", [
                 {
-                    id: q._id,
-                    priceConfiguration,
+                    value: JSON.stringify({ id: q._id, priceConfiguration }),
                 },
             ]);
 
@@ -89,5 +87,11 @@ export class ProductController {
 
         const res1 = await ProductModal.find();
         res.status(200).json({ data: res1 });
+    }
+
+    async getById(req: Request, res: Response) {
+        const { id } = req.params;
+        const product = await ProductModal.findById(id);
+        res.status(200).json({ data: product });
     }
 }
